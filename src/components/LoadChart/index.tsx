@@ -1,17 +1,16 @@
-import { Pie } from '@ant-design/charts';
-import { Gauge } from '@ant-design/charts';
+import { Gauge, Pie } from '@ant-design/charts';
 
-export const LoadChartGauge = ({name=""}) => {
+export const LoadChartGauge = ({ name = '', cur = 0, total = 100 }) => {
   const config = {
     width: 240,
     height: 240,
     paddingBottom: 0,
-    marginBottom:0,
+    marginBottom: 0,
     insetBottom: 30,
     autoFit: true,
     data: {
-      target: 16,
-      total: 100,
+      target: cur,
+      total: total,
       name: 'score',
     },
     legend: false,
@@ -32,7 +31,7 @@ export const LoadChartGauge = ({name=""}) => {
   return <Gauge {...config} />;
 };
 
-const LoadChartPie = ({data = {}, name = ""}) => {
+const LoadChartPie = ({ data = {}, name = '' }) => {
   const config = {
     data: data,
     angleField: 'value',
