@@ -45,8 +45,9 @@ export const transformServerLoad = (input: Map<string, string>): Map<string, num
   return result;
 };
 
-// 定义函数重载
+// 将字节转换为最适合它的单位
 export function transformBytes(bytesStr: string): [number, string];
+// 将字节转换为最适合它的单位
 export function transformBytes(bytesNum: number): [number, string];
 
 // 实现函数
