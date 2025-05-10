@@ -14,6 +14,7 @@ import { PageContainer } from '@ant-design/pro-components';
 import { useModel } from '@umijs/max';
 import { Col, Divider, Row } from 'antd';
 import React, { useEffect, useState } from 'react';
+import {abs} from "stylis";
 
 
 let date = new Date().toLocaleTimeString();
@@ -52,17 +53,20 @@ const Welcome: React.FC = () => {
       setMem(fixPrecision((server_load.get('mem') as number) * 100));
       // Net
       // setNet(transformBytes((server_load.get('net-w') ?? 0) + (server_load.get('net-r') ?? 0)))
-      let preread = netread[0] < netread[1] ? netread[1] : netread[0];
+      // let preread = netread[0] < netread[1] ? netread[1] : netread[0];
+      let preread = netread[1];
       setNetRead([preread, (server_load.get('net-r') as number) ?? 0]);
-      let prewrite = netwrite[0] > netread[1] ? netwrite[1] : netwrite[0];
+      let prewrite = netwrite[1];
       setNetWrite([prewrite, (server_load.get('net-w') as number) ?? 0]);
 
-      setNetReadRate(fixPrecision((netread[1] - netread[0]) / interval));
-      setNetWriteRate(fixPrecision((netwrite[1] - netwrite[0]) / interval));
+      setNetReadRate(Math.floor((netread[1] - netread[0]) / interval));
+      setNetWriteRate(Math.floor((netwrite[1] - netwrite[0]) / interval));
+      // setNetReadRate(fixPrecision((netread[1] - netread[0]) / interval));
+      // setNetWriteRate(fixPrecision((netwrite[1] - netwrite[0]) / interval));
 
       let date = new Date().toLocaleTimeString();
-      netDatas.push({ time: date, value: fixPrecision(netreadrate / 1024), cate: cateRead });
-      netDatas.push({ time: date, value: fixPrecision(netwriterate / 1024), cate: cateWrite });
+      netDatas.push({ time: date, value: abs(Math.floor(netreadrate)), cate: cateRead });
+      netDatas.push({ time: date, value: abs(Math.floor(netwriterate)), cate: cateWrite });
       if (netDatas.length > maxLen) {
         netDatas.shift();
         netDatas.shift();
@@ -96,7 +100,7 @@ const Welcome: React.FC = () => {
             <LoadChartGauge
               name={'Disk ' + diskAvailable[1] + '/' + diskTotal[1]}
               cur={diskAvailable[0]}
-              total={diskTotal[0]}
+              total={1000}
             />
           </Col>
         </Row>
