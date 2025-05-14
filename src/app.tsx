@@ -110,7 +110,8 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
       },
     },
     waterMarkProps: {
-      content: initialState?.currentUser?.name,
+      // content: initialState?.currentUser?.name,
+      content: "",
     },
     footerRender: () => <Footer />,
     onPageChange: () => {
@@ -184,4 +185,14 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
  */
 export const request = {
   ...errorConfig,
+};
+
+export const render = (oldRender: any) => {
+  const script = document.createElement('script');
+  script.src = '/config.js';
+  script.onload = () => {
+    console.log('config.js loaded');
+    oldRender();
+  };
+  document.head.appendChild(script);
 };

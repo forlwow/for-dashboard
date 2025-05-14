@@ -1,0 +1,61 @@
+.loadtest-form-container {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: #f4f6f8;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.loadtest-form .form-row {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.loadtest-form label {
+  font-weight: bold;
+  margin-bottom: 0.4rem;
+}
+
+.loadtest-form input,
+.loadtest-form select,
+.loadtest-form textarea {
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+button {
+  background-color: #28a745;
+  color: white;
+  font-weight: bold;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #218838;
+}
+
+.loadtest-output {
+  margin-top: 1.5rem;
+  background: #fff;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  white-space: pre-wrap;
+}

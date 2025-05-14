@@ -23,7 +23,6 @@ export function useFetchData(
               Object.entries(result).map(([key, value]) => [key, String(value)]),
             );
         setData(mapData);
-        console.log(data);
       } catch (err) {
         setError((err as Error).message);
       } finally {

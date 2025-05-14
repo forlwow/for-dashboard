@@ -22,6 +22,11 @@ import {
   transformServerLoad,
 } from '@/components/API/apiService';
 import { trans2Map, useFetchData } from '@/components/API/useFetchData';
+import RequestForm from '@/components/TestPageComp/RequesetForm'
+import LoadTestForm from "@/components/TestPageComp/LoadTestForm";
+import LogTester from "@/components/TestPageComp/LogTest";
+import LogViewer from "@/components/TestPageComp/LogViewer";
+import LogLoadTest from "@/components/TestPageComp/LogLoadTest";
 
 export {
   AvatarDropdown,
@@ -40,4 +45,5 @@ export {
   transformBytes,
   transformServerLoad,
   useFetchData,
+  RequestForm,LoadTestForm,LogTester, LogViewer, LogLoadTest
 };

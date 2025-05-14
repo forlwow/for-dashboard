@@ -32,6 +32,21 @@ export default [
     path: '/',
     redirect: '/welcome',
   },
+  {
+    path: '/test',
+    name: '请求与压力测试',
+    component: './test_page/TestPage'
+  },
+  {
+    path: '/log',
+    name: '日志',
+    component: './Log'
+  },
+  {
+    path: '/ping',
+    name: 'ping',
+    component: './Ping'
+  },
   // {
   //   path: '/admin',
   //   name: 'admin',

@@ -31,7 +31,7 @@ const fixPrecision = (num: number) => {
 };
 
 const Welcome: React.FC = () => {
-  const interval = 5000;
+  const interval = 1000;
   const { initialState } = useModel('@@initialState');
   const { data: server_info } = useFetchData(fetchServerInfo, trans2Map);
   const { data: server_load_ } = useFetchData(fetchServerLoad, trans2Map, interval);
@@ -48,6 +48,7 @@ const Welcome: React.FC = () => {
   useEffect(() => {
     const server_load = transformServerLoad(server_load_);
     if (server_load) {
+      console.log(server_load)
       // Cpu, Mem
       setCpu(fixPrecision((server_load.get('cpu') as number) * 100));
       setMem(fixPrecision((server_load.get('mem') as number) * 100));
@@ -55,15 +56,18 @@ const Welcome: React.FC = () => {
       // setNet(transformBytes((server_load.get('net-w') ?? 0) + (server_load.get('net-r') ?? 0)))
       // let preread = netread[0] < netread[1] ? netread[1] : netread[0];
       let preread = netread[1];
-      setNetRead([preread, (server_load.get('net-r') as number) ?? 0]);
       let prewrite = netwrite[1];
-      setNetWrite([prewrite, (server_load.get('net-w') as number) ?? 0]);
+      let nr = (server_load.get('net-r') as number) ?? 0
+      let nw = (server_load.get('net-w') as number) ?? 0
+      setNetRead([preread, nr === 0 ? preread : nr]);
+      setNetWrite([prewrite, nw ===0 ? prewrite : nw]);
+      console.log(netread, netwrite)
+      console.log(netread[1] - netread[0], netwrite[1] - netwrite[0])
 
-      setNetReadRate(Math.floor((netread[1] - netread[0]) / interval));
-      setNetWriteRate(Math.floor((netwrite[1] - netwrite[0]) / interval));
+      setNetReadRate(Math.floor((netread[1] - netread[0]) / (interval/1000) ));
+      setNetWriteRate(Math.floor((netwrite[1] - netwrite[0]) / (interval/1000)));
       // setNetReadRate(fixPrecision((netread[1] - netread[0]) / interval));
       // setNetWriteRate(fixPrecision((netwrite[1] - netwrite[0]) / interval));
-
       let date = new Date().toLocaleTimeString();
       netDatas.push({ time: date, value: abs(Math.floor(netreadrate)), cate: cateRead });
       netDatas.push({ time: date, value: abs(Math.floor(netwriterate)), cate: cateWrite });

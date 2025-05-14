@@ -36,7 +36,7 @@ export const transformServerLoad = (input: Map<string, string>): Map<string, num
     const valueStr = input.get(key) ?? '0';
     // 尝试解析为浮点数
     const num = parseFloat(valueStr);
-    console.log(key, valueStr, num)
+    // console.log(key, valueStr, num)
     // 如果解析失败（NaN），则赋值为 0
     const validNum = isNaN(num) ? 0 : num;
     // 保留两位小数
